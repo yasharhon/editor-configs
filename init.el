@@ -11,6 +11,7 @@
   '(material-theme                  ;; Theme
     ;better-defaults                ;; Changed defaults for Emacs. Should be added to own file instead
     elpy                            ;; Emacs Lisp Python Environment
+    php-mode                        ;; Major mode for PHP
     )
   )
 
