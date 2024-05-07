@@ -27,9 +27,8 @@
 ; Initializes the package infrastructure
 (package-initialize)
 
-; If there are no archived package contents, refresh them
-(when (not package-archive-contents)
-  (package-refresh-contents))
+; Refresh packages. Seems to always be needed
+(package-refresh-contents)
 
 ; Installs packages by scanning the list in myPackages
 ; If the package listed is not already installed, install it
