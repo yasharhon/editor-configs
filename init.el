@@ -13,6 +13,8 @@
     elpy                            ;; Emacs Lisp Python Environment
     php-mode                        ;; Major mode for PHP
     web-mode                        ;; Mode for web files
+    dockerfile-mode                 ;; Mode for Dockerfiles
+    docker-compose-mode             ;; Mode for docker compose
     )
   )
 
@@ -39,6 +41,13 @@
           (unless (package-installed-p package)
             (package-install package)))
       myPackages)
+
+;; ===================================
+;; File mode associations
+;; ===================================
+
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+(add-to-list 'auto-mode-alist '("docker-compose" . docker-compose-mode))
 
 ;; ===================================
 ;; Basic Customization
