@@ -12,6 +12,7 @@
     ;better-defaults                ;; Changed defaults for Emacs. Should be added to own file instead
     elpy                            ;; Emacs Lisp Python Environment
     php-mode                        ;; Major mode for PHP
+    web-mode                        ;; Mode for web files
     )
   )
 
@@ -45,6 +46,7 @@
 (setq inhibit-startup-message t)     ;; Hide the startup message
 (load-theme 'material t)             ;; Load material theme
 (global-linum-mode t)                ;; Enable line numbers globally
+;;(global-display-line-numbers-mode t)                ;; Enable line numbers globally
 (desktop-save-mode 1)                ;; Save session
 (setq visible-bell 1)                ;; Mute bell
 (delete-selection-mode 1)            ;; Always delete selection 
