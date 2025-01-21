@@ -1,2 +1,1 @@
-# Command to install omnisharp LSP server
-omnisharp-install-server
+

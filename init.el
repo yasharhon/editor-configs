@@ -15,7 +15,6 @@
     web-mode                        ;; Mode for web files
     dockerfile-mode                 ;; Mode for Dockerfiles
     docker-compose-mode             ;; Mode for docker compose
-    omnisharp                       ;; Mode for C# files
     )
   )
 
@@ -56,7 +55,7 @@
 
 (setq inhibit-startup-message t)     ;; Hide the startup message
 (load-theme 'material t)             ;; Load material theme
-(global-linum-mode t)                ;; Enable line numbers globally
+(global-display-line-numbers-mode 1)                ;; Enable line numbers globally
 (global-display-line-numbers-mode t)                ;; Enable line numbers globally
 (desktop-save-mode 1)                ;; Save session
 (setq visible-bell 1)                ;; Mute bell
@@ -102,17 +101,6 @@
       python-shell-interpreter-args "-i"
       elpy-rpc-python-command "python3"
       )
-
-; Automatically invoke omnisharp
-(add-hook 'csharp-mode-hook 'omnisharp-mode)
-
-; Add omnisharp to list of company mode backends
-(eval-after-load
- 'company
- '(add-to-list 'company-backends 'company-omnisharp))
-
-; Initialize company mode when starting C# mode
-(add-hook 'csharp-mode-hook #'company-mode)
 
 ;; ====================================
 ;; User-Defined init.el ends here
