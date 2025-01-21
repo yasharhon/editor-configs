@@ -15,7 +15,6 @@
     web-mode                        ;; Mode for web files
     dockerfile-mode                 ;; Mode for Dockerfiles
     docker-compose-mode             ;; Mode for docker compose
-    omnisharp                       ;; Mode for C# files
     )
   )
 
@@ -102,17 +101,6 @@
       python-shell-interpreter-args "-i"
       elpy-rpc-python-command "python3"
       )
-
-; Automatically invoke omnisharp
-(add-hook 'csharp-mode-hook 'omnisharp-mode)
-
-; Add omnisharp to list of company mode backends
-(eval-after-load
- 'company
- '(add-to-list 'company-backends 'company-omnisharp))
-
-; Initialize company mode when starting C# mode
-(add-hook 'csharp-mode-hook #'company-mode)
 
 ;; ====================================
 ;; User-Defined init.el ends here
