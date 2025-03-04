@@ -3,6 +3,7 @@ A convenient repo containing my init file for emacs
 
 ## Requirements
 * `virtualenv`
+* `texlab`
 
 ## Instructions
 To set up your Emacs installation, do the following:

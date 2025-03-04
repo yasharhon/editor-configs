@@ -15,6 +15,8 @@
     web-mode                        ;; Mode for web files
     dockerfile-mode                 ;; Mode for Dockerfiles
     docker-compose-mode             ;; Mode for docker compose
+    lsp-mode                        ;; General LSP mode
+    lsp-latex                       ;; LSP mode for LaTeX
     )
   )
 
@@ -101,6 +103,17 @@
       python-shell-interpreter-args "-i"
       elpy-rpc-python-command "python3"
       )
+
+; Function to enable yas minor mode
+(defun my-enable-yas-minor-mode ()
+  (yas-minor-mode 1))
+
+(with-eval-after-load "tex-mode"
+ (add-hook 'tex-mode-hook 'lsp)
+ (add-hook 'latex-mode-hook 'lsp)
+ (add-hook 'tex-mode-hook 'my-enable-yas-minor-mode)
+ (add-hook 'latex-mode-hook 'my-enable-yas-minor-mode))
+
 
 ;; ====================================
 ;; User-Defined init.el ends here
