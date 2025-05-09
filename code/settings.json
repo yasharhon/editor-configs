@@ -1,0 +1,16 @@
+{
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+    },
+    "editor.formatOnSave": true,
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+    "python.locator": "js",
+    "workbench.colorTheme": "Default Dark Modern"
+}
