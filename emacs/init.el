@@ -105,6 +105,39 @@
  (add-hook 'tex-mode-hook 'my-enable-yas-minor-mode)
  (add-hook 'latex-mode-hook 'my-enable-yas-minor-mode))
 
+; Register ty as LSP client in Python mode
+(with-eval-after-load 'lsp-mode
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("ty" "server"))
+    :major-modes '(python-mode)
+    :server-id 'ty
+    :priority -1)))
+
+; Start LSP when entering Python mode
+(add-hook 'python-mode-hook #'lsp)
+
+; Company mode configuration
+;; How quickly completions appear after typing
+(setq company-idle-delay 0.1
+      ;; Trigger after a single character
+      company-minimum-prefix-length 1
+      ;; Line up annotations (types, modules) neatly
+      company-tooltip-align-annotations t)
+
+;; Tell lsp-mode to provide completions via completion-at-point (CAPF)
+;; company consumes CAPF when active
+(setq lsp-completion-provider :capf)
+
+; Start company when entering Python mode
+(add-hook 'python-mode-hook #'company-mode)
+
+; Format on save with Ruff
+(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
+
+;; ====================================
+;; Custom Functions
+;; ====================================
 
 ;; ====================================
 ;; User-Defined init.el ends here
