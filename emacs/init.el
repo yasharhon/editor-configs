@@ -95,17 +95,6 @@
 ;; ====================================
 ;; Development Setup
 ;; ====================================
-; Enable elpy
-(elpy-enable)
-
-; Might need to run elpy-rpc-reinstall-virtualenv
-; Make sure to install virtualenv!
-(setq
-      python-shell-interpreter "python3"
-      python-shell-interpreter-args "-i"
-      elpy-rpc-python-command "python3"
-      )
-
 ; Function to enable yas minor mode
 (defun my-enable-yas-minor-mode ()
   (yas-minor-mode 1))
@@ -125,7 +114,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(elpy material-theme)))
+ '(package-selected-packages '(company material-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
