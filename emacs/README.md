@@ -3,6 +3,8 @@ My configuration files for Emacs.
 
 ## Requirements
 * `texlab`
+* `ruff`
+* `ty`
 
 ## Instructions
 To set up your Emacs installation, do the following:
