@@ -10,13 +10,15 @@
 (defvar myPackages
   '(material-theme                  ;; Theme
     ;better-defaults                ;; Changed defaults for Emacs. Should be added to own file instead
-    elpy                            ;; Emacs Lisp Python Environment
     php-mode                        ;; Major mode for PHP
     web-mode                        ;; Mode for web files
     dockerfile-mode                 ;; Mode for Dockerfiles
     docker-compose-mode             ;; Mode for docker compose
     lsp-mode                        ;; General LSP mode
     lsp-latex                       ;; LSP mode for LaTeX
+    company                         ;; Completion UI
+    reformatter                     ;; Needed for Ruff formatting
+    ruff-format                     ;; Provides formatting with Ruff
     )
   )
 
@@ -93,17 +95,6 @@
 ;; ====================================
 ;; Development Setup
 ;; ====================================
-; Enable elpy
-(elpy-enable)
-
-; Might need to run elpy-rpc-reinstall-virtualenv
-; Make sure to install virtualenv!
-(setq
-      python-shell-interpreter "python3"
-      python-shell-interpreter-args "-i"
-      elpy-rpc-python-command "python3"
-      )
-
 ; Function to enable yas minor mode
 (defun my-enable-yas-minor-mode ()
   (yas-minor-mode 1))
@@ -114,6 +105,39 @@
  (add-hook 'tex-mode-hook 'my-enable-yas-minor-mode)
  (add-hook 'latex-mode-hook 'my-enable-yas-minor-mode))
 
+; Register ty as LSP client in Python mode
+(with-eval-after-load 'lsp-mode
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("ty" "server"))
+    :major-modes '(python-mode)
+    :server-id 'ty
+    :priority -1)))
+
+; Start LSP when entering Python mode
+(add-hook 'python-mode-hook #'lsp)
+
+; Company mode configuration
+;; How quickly completions appear after typing
+(setq company-idle-delay 0.1
+      ;; Trigger after a single character
+      company-minimum-prefix-length 1
+      ;; Line up annotations (types, modules) neatly
+      company-tooltip-align-annotations t)
+
+;; Tell lsp-mode to provide completions via completion-at-point (CAPF)
+;; company consumes CAPF when active
+(setq lsp-completion-provider :capf)
+
+; Start company when entering Python mode
+(add-hook 'python-mode-hook #'company-mode)
+
+; Format on save with Ruff
+(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
+
+;; ====================================
+;; Custom Functions
+;; ====================================
 
 ;; ====================================
 ;; User-Defined init.el ends here
@@ -123,7 +147,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(elpy material-theme)))
+ '(package-selected-packages '(company material-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
