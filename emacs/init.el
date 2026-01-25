@@ -10,13 +10,15 @@
 (defvar myPackages
   '(material-theme                  ;; Theme
     ;better-defaults                ;; Changed defaults for Emacs. Should be added to own file instead
-    elpy                            ;; Emacs Lisp Python Environment
     php-mode                        ;; Major mode for PHP
     web-mode                        ;; Mode for web files
     dockerfile-mode                 ;; Mode for Dockerfiles
     docker-compose-mode             ;; Mode for docker compose
     lsp-mode                        ;; General LSP mode
     lsp-latex                       ;; LSP mode for LaTeX
+    company                         ;; Completion UI
+    reformatter                     ;; Needed for Ruff formatting
+    ruff-format                     ;; Provides formatting with Ruff
     )
   )
 
