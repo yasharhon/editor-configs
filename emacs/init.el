@@ -19,6 +19,7 @@
     company                         ;; Completion UI
     reformatter                     ;; Needed for Ruff formatting
     ruff-format                     ;; Provides formatting with Ruff
+    flymake-ruff                    ;; Flymake-based Ruff linting
     )
   )
 
@@ -134,6 +135,9 @@
 
 ; Format on save with Ruff
 (add-hook 'python-mode-hook 'ruff-format-on-save-mode)
+
+; Lint Python files with Ruff
+(add-hook 'python-mode-hook #'flymake-ruff-load)
 
 ;; ====================================
 ;; Custom Functions
