@@ -3,18 +3,18 @@
         "editor.codeActionsOnSave": {
             "source.organizeImports": "explicit"
         },
-        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSave": true
     },
     "[svelte]": {
         "editor.defaultFormatter": "svelte.svelte-vscode"
     },
+    "autoDocstring.docstringFormat": "google",
+    "autoDocstring.generateDocstringOnEnter": false,
+    "autoDocstring.startOnNewLine": true,
+    "autoDocstring.quoteStyle": "\"\"\"",
     "C_Cpp.default.compilerPath": "/usr/bin/g++",
     "editor.formatOnSave": true,
-    "isort.args": [
-        "--profile",
-        "black"
-    ],
     "python.locator": "js",
     "workbench.colorTheme": "Default Dark Modern"
 }
