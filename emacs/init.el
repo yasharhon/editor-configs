@@ -5,6 +5,7 @@
 ;; ===================================
 
 (defvar myBackupDirectory "/my/backup/path")
+(defvar myExtraPackagesDirectory "/my/extra/code/path")
 
 ; myPackages contains a list of package names
 (defvar myPackages
@@ -46,6 +47,15 @@
           (unless (package-installed-p package)
             (package-install package)))
       myPackages)
+
+;; ===================================
+;; Extra Package Support
+;; ===================================
+; Load extra packages
+(add-to-list 'load-path myExtraPackagesDirectory)
+
+; Include googledocstring.el
+(require 'googledocstrings)
 
 ;; ===================================
 ;; File mode associations
