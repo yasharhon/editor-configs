@@ -21,6 +21,8 @@
     reformatter                     ;; Needed for Ruff formatting
     ruff-format                     ;; Provides formatting with Ruff
     flymake-ruff                    ;; Flymake-based Ruff linting
+    yasnippet                       ;; Snippet templating system
+    yasnippet-snippets              ;; Snippet library
     )
   )
 
@@ -110,6 +112,12 @@
 (defun my-enable-yas-minor-mode ()
   (yas-minor-mode 1))
 
+; Activate yasnippet
+(require 'yasnippet)
+
+; Load snippets
+(yas-reload-all)
+
 (with-eval-after-load "tex-mode"
  (add-hook 'tex-mode-hook 'lsp)
  (add-hook 'latex-mode-hook 'lsp)
@@ -148,6 +156,9 @@
 
 ; Lint Python files with Ruff
 (add-hook 'python-mode-hook #'flymake-ruff-load)
+
+; Load snippets in Python mode
+(add-hook 'python-mode-hook #'yas-minor-mode)
 
 ;; ====================================
 ;; Custom Functions
