@@ -72,7 +72,6 @@
 
 (setq inhibit-startup-message t)     ;; Hide the startup message
 (load-theme 'material t)             ;; Load material theme
-(global-display-line-numbers-mode 1)                ;; Enable line numbers globally
 (global-display-line-numbers-mode t)                ;; Enable line numbers globally
 (desktop-save-mode 1)                ;; Save session
 (setq visible-bell 1)                ;; Mute bell
