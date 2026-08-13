@@ -9,9 +9,8 @@
 
 ; myPackages contains a list of package names
 (defvar myPackages
-  '(material-theme                  ;; Theme
+  '(php-mode                        ;; Major mode for PHP
     ;better-defaults                ;; Changed defaults for Emacs. Should be added to own file instead
-    php-mode                        ;; Major mode for PHP
     web-mode                        ;; Mode for web files
     dockerfile-mode                 ;; Mode for Dockerfiles
     docker-compose-mode             ;; Mode for docker compose
@@ -21,8 +20,6 @@
     reformatter                     ;; Needed for Ruff formatting
     ruff-format                     ;; Provides formatting with Ruff
     flymake-ruff                    ;; Flymake-based Ruff linting
-    yasnippet                       ;; Snippet templating system
-    yasnippet-snippets              ;; Snippet library
     )
   )
 
@@ -62,6 +59,22 @@
 (use-package material-theme
   :config
   (load-theme 'material t)
+)
+
+; Yasnippet
+(use-package yasnippet
+  :config
+  (yas-reload-all)
+  :hook
+  (
+   (python-mode tex-mode latex-mode) . yas-minor-mode
+   )
+)
+
+; Yasnippet snippets
+(use-package yasnippet-snippets
+  :after
+  yasnippet
 )
 
 ;; ===================================
@@ -120,21 +133,10 @@
 ;; ====================================
 ;; Development Setup
 ;; ====================================
-; Function to enable yas minor mode
-(defun my-enable-yas-minor-mode ()
-  (yas-minor-mode 1))
-
-; Activate yasnippet
-(require 'yasnippet)
-
-; Load snippets
-(yas-reload-all)
-
 (with-eval-after-load "tex-mode"
  (add-hook 'tex-mode-hook 'lsp)
  (add-hook 'latex-mode-hook 'lsp)
- (add-hook 'tex-mode-hook 'my-enable-yas-minor-mode)
- (add-hook 'latex-mode-hook 'my-enable-yas-minor-mode))
+)
 
 ; Register ty as LSP client in Python mode
 (with-eval-after-load 'lsp-mode
@@ -168,9 +170,6 @@
 
 ; Lint Python files with Ruff
 (add-hook 'python-mode-hook #'flymake-ruff-load)
-
-; Load snippets in Python mode
-(add-hook 'python-mode-hook #'yas-minor-mode)
 
 ;; ====================================
 ;; Custom Functions
