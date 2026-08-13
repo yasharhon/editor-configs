@@ -40,7 +40,7 @@
 (package-initialize)
 
 ; If there are no archived package contents, refresh them
-(when (not package-archive-contents)
+(unless package-archive-contents
   (package-refresh-contents))
 
 ; Installs packages by scanning the list in myPackages
