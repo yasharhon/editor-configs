@@ -18,8 +18,6 @@
     lsp-latex                       ;; LSP mode for LaTeX
     company                         ;; Completion UI
     reformatter                     ;; Needed for Ruff formatting
-    ruff-format                     ;; Provides formatting with Ruff
-    flymake-ruff                    ;; Flymake-based Ruff linting
     )
   )
 
@@ -61,7 +59,7 @@
   (load-theme 'material t)
 )
 
-; Yasnippet
+; Yasnippet - snippet management library
 (use-package yasnippet
   :config
   (yas-reload-all)
@@ -71,10 +69,21 @@
    )
 )
 
-; Yasnippet snippets
+; Yasnippet snippets - premade snippets
 (use-package yasnippet-snippets
   :after
   yasnippet
+  )
+
+; Ruff format - Formatter for Python
+(use-package ruff-format
+  :hook
+  (python-mode . ruff-format-on-save-mode)
+)
+
+; Flymake Ruff - Python linter
+(use-package flymake-ruff
+  :hook (python-mode . flymake-ruff-load)
 )
 
 ;; ===================================
@@ -164,12 +173,6 @@
 
 ; Start company when entering Python mode
 (add-hook 'python-mode-hook #'company-mode)
-
-; Format on save with Ruff
-(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
-
-; Lint Python files with Ruff
-(add-hook 'python-mode-hook #'flymake-ruff-load)
 
 ;; ====================================
 ;; Custom Functions
