@@ -17,7 +17,6 @@
     lsp-mode                        ;; General LSP mode
     lsp-latex                       ;; LSP mode for LaTeX
     company                         ;; Completion UI
-    reformatter                     ;; Needed for Ruff formatting
     )
   )
 
