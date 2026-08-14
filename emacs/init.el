@@ -9,11 +9,7 @@
 
 ; myPackages contains a list of package names
 (defvar myPackages
-  '(php-mode                        ;; Major mode for PHP
-    ;better-defaults                ;; Changed defaults for Emacs. Should be added to own file instead
-    web-mode                        ;; Mode for web files
-    dockerfile-mode                 ;; Mode for Dockerfiles
-    docker-compose-mode             ;; Mode for docker compose
+  '(;better-defaults                ;; Changed defaults for Emacs. Should be added to own file instead
     lsp-mode                        ;; General LSP mode
     lsp-latex                       ;; LSP mode for LaTeX
     company                         ;; Completion UI
@@ -65,7 +61,7 @@
   :hook
   (
    (python-mode tex-mode latex-mode) . yas-minor-mode
-   )
+  )
 )
 
 ; Yasnippet snippets - premade snippets
@@ -85,6 +81,24 @@
   :hook (python-mode . flymake-ruff-load)
 )
 
+; PHP mode
+(use-package php-mode)
+
+; Web mode
+(use-package web-mode)
+
+; Dockerfile mode
+(use-package dockerfile-mode
+  :mode
+  "Dockerfile\\'"
+)
+
+; Docker-compose mode
+(use-package docker-compose-mode
+  :mode
+  "docker-compose.*\\.ya?ml\\'"
+)
+
 ;; ===================================
 ;; Extra Package Support
 ;; ===================================
@@ -93,13 +107,6 @@
 
 ; Include googledocstring.el
 (require 'googledocstrings)
-
-;; ===================================
-;; File mode associations
-;; ===================================
-
-(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
-(add-to-list 'auto-mode-alist '("docker-compose" . docker-compose-mode))
 
 ;; ===================================
 ;; Basic Customization
