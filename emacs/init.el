@@ -99,6 +99,16 @@
   ((python-mode tex-mode latex-mode) . lsp) ; Extend this list as more LSP support is added to this config
   :custom
   (lsp-completion-provider :capf)
+  :config
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("ty" "server"))
+    :major-modes '(python-mode)
+    :server-id 'ty
+    :priority -1
+    )
+   )
+  )
 )
 
 ; LSP Latex - LSP support for TeX documents
@@ -156,25 +166,6 @@
 ;; ====================================
 ;; Development Setup
 ;; ====================================
-(with-eval-after-load "tex-mode"
- (add-hook 'tex-mode-hook 'lsp)
- (add-hook 'latex-mode-hook 'lsp)
-)
-
-; Register ty as LSP client in Python mode
-(with-eval-after-load 'lsp-mode
-  (lsp-register-client
-   (make-lsp-client
-    :new-connection (lsp-stdio-connection '("ty" "server"))
-    :major-modes '(python-mode)
-    :server-id 'ty
-    :priority -1)))
-
-; Start LSP when entering Python mode
-(add-hook 'python-mode-hook #'lsp)
-
-; Start company when entering Python mode
-(add-hook 'python-mode-hook #'company-mode)
 
 ;; ====================================
 ;; Custom Functions
