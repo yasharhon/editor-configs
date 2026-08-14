@@ -124,7 +124,9 @@
 (add-to-list 'load-path myExtraPackagesDirectory)
 
 ; Include googledocstring.el
-(require 'googledocstrings)
+(when (locate-library "googledocstrings")
+  (require 'googledocstrings)
+  )
 
 ;; ===================================
 ;; Basic Customization
