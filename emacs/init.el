@@ -157,7 +157,7 @@
 (message "Deleting old backup files...")
 (let ((week (* 60 60 24 7))
       (current (float-time (current-time))))
-  (dolist (file (directory-files temporary-file-directory t))
+  (dolist (file (directory-files myBackupDirectory t))
     (when (and (backup-file-name-p file)
                (> (- current (float-time (nth 4 (file-attributes file))))
                   week))
