@@ -7,15 +7,6 @@
 (defvar myBackupDirectory "/my/backup/path")
 (defvar myExtraPackagesDirectory "/my/extra/code/path")
 
-; myPackages contains a list of package names
-(defvar myPackages
-  '(;better-defaults                ;; Changed defaults for Emacs. Should be added to own file instead
-    lsp-mode                        ;; General LSP mode
-    lsp-latex                       ;; LSP mode for LaTeX
-    company                         ;; Completion UI
-    )
-  )
-
 ;; ===================================
 ;; MELPA Package Support
 ;; ===================================
@@ -32,13 +23,6 @@
 ; If there are no archived package contents, refresh them
 (unless package-archive-contents
   (package-refresh-contents))
-
-; Installs packages by scanning the list in myPackages
-; If the package listed is not already installed, install it
-(mapc #'(lambda (package)
-          (unless (package-installed-p package)
-            (package-install package)))
-      myPackages)
 
 ;; ===================================
 ;; use-package based installs
@@ -97,6 +81,30 @@
 (use-package docker-compose-mode
   :mode
   "docker-compose.*\\.ya?ml\\'"
+)
+
+; Company mode - GUI for lsp-mode completion
+(use-package company
+  :hook
+  (prog-mode . company-mode)
+  :custom
+  (company-idle-delay 0.1) ; How quickly completions appear after typing
+  (company-minimum-prefix-length 1) ; Trigger after a single character
+  (company-tooltip-align-annotations t) ; Line up annotations (types, modules) neatly
+)
+
+; LSP mode - Provides LSP-based completions
+(use-package lsp-mode
+  :hook
+  ((python-mode tex-mode latex-mode) . lsp) ; Extend this list as more LSP support is added to this config
+  :custom
+  (lsp-completion-provider :capf)
+)
+
+; LSP Latex - LSP support for TeX documents
+(use-package lsp-latex
+  :after
+  lsp-mode
 )
 
 ;; ===================================
@@ -164,18 +172,6 @@
 
 ; Start LSP when entering Python mode
 (add-hook 'python-mode-hook #'lsp)
-
-; Company mode configuration
-;; How quickly completions appear after typing
-(setq company-idle-delay 0.1
-      ;; Trigger after a single character
-      company-minimum-prefix-length 1
-      ;; Line up annotations (types, modules) neatly
-      company-tooltip-align-annotations t)
-
-;; Tell lsp-mode to provide completions via completion-at-point (CAPF)
-;; company consumes CAPF when active
-(setq lsp-completion-provider :capf)
 
 ; Start company when entering Python mode
 (add-hook 'python-mode-hook #'company-mode)
