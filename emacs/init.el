@@ -132,9 +132,9 @@
 
 (setq inhibit-startup-message t)     ;; Hide the startup message
 (global-display-line-numbers-mode t)                ;; Enable line numbers globally
-(desktop-save-mode 1)                ;; Save session
-(setq visible-bell 1)                ;; Mute bell
-(delete-selection-mode 1)            ;; Always delete selection 
+(desktop-save-mode t)                ;; Save session
+(setq visible-bell t)                ;; Mute bell
+(delete-selection-mode t)            ;; Always delete selection 
 
 ;; ===================================
 ;; Advanced Customization
