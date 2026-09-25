@@ -107,7 +107,22 @@
     :server-id 'ty
     :priority -1
     )
+   )  
+
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("gopls"))
+    :major-modes '(go-mode)
+    :server-id 'gopls
+    :priority -1
+    )
    )
+  )
+
+; Go mode
+(use-package go-mode
+;  :hook
+;  (go-mode . lsp-deferred)
   )
 
 ; LSP Latex - LSP support for TeX documents
