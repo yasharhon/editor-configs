@@ -5,6 +5,7 @@ My configuration files for Emacs.
 * `texlab`
 * `ruff`
 * `ty`
+* `gopls`
 
 ## Instructions
 To set up your Emacs installation, do the following:
